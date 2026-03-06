@@ -1,0 +1,54 @@
+PROJECT TITLE: Bio-Inspired Dendritic Learning Incorporated Vision Transformer (DVT) for Efficient Image Classification
+
+1. OVERVIEW
+The Bio-Inspired Dendritic Learning Incorporated Vision Transformer (DVT) project is a hybrid deep learning system designed to solve the high computational cost of standard Vision Transformers (ViT) while improving accuracy on small-to-medium datasets like CIFAR-10. It combines the global attention capabilities of Transformers with the parameter-efficient, non-linear processing of biological dendrites.
+
+2. CORE ARCHITECTURE
+The project replaces the two most resource-heavy parts of a standard Vision Transformer with more efficient modules:
+
+A. Stage A: Vision Transformer with LSA (Feature Extractor)
+- Implementation: Locality Self-Attention (LSA).
+- Innovation: Introduces a self-masking matrix m and a learnable scaling parameter gamma.
+- Impact: Allows the model to focus on local context within patches, providing the inductive bias of CNNs within a transformer framework.
+
+B. Stage B: Dendritic Neural Network (Classifier)
+- Implementation: Replaces MLP with a 3-layer biological structure:
+  1. Synapse Layer: Maps features to multiple branches.
+  2. Dendrite Layer: Performs Feature Normalization η(x) on each branch.
+  3. Soma Layer: Aggregates signals to produce class probabilities.
+- Impact: Achieves higher accuracy with ~30% fewer parameters than traditional MLP classifiers.
+
+3. IMPLEMENTATION MODULES
+- dvt_model.py: Integrated architecture connecting ViT backbone to Dendritic Classifier.
+- vit_model.py: Patch embedding and LSA Transformer blocks.
+- dendritic_layer.py: Synapse, Dendrite, and Soma logic.
+- dataset_loader.py: Data handling for CIFAR-10/100/SVHN with augmentation.
+- train.py: Training pipeline with AdamW and Cosine Annealing.
+- evaluate.py: Metrics (Accuracy, F1-Score) and Confusion Matrix generation.
+
+4. TECHNICAL PROCESS
+1. Input Pipeline: Images (32x32) split into 4x4 patches.
+2. Attention: LSA blocks process patches with dynamic scaling.
+3. Feature Extraction: CLS token represents the global image features.
+4. Dendritic Classification: CLS token is processed through biological synapse modeling.
+5. Aggregation: Soma calculates final 10-class probability.
+
+5. RESULTS & COMPARISON
+- ViT (Standard): ~12.1M parameters.
+- DVT (Ours): ~8.4M parameters.
+- Goal: Demonstrate that DVT achieves better accuracy and parameter efficiency compared to traditional Vision Transformers and ResNet architectures.
+
+6. REAL-TIME INFERENCE & TESTING
+- Model Testing Tab: A dedicated section for professors and users to upload real-world images.
+- Logic: Performs on-the-fly 4x4 patch partitioning and dendritic soma aggregation.
+- Visuals: Displays classification labels, confidence percentages, and processing latency charts.
+- Backend: Powered by a FastAPI server (backend.py) to provide real-time model predictions.
+
+7. WEB PRESENTATION
+Includes a React + Vite dashboard for visualizing training logs, accuracy curves, and model architecture deep-dives with a premium glassmorphism UI.
+
+7. TECH STACK
+- Language: Python
+- DL Framework: PyTorch
+- UI Framework: React.js, Tailwind CSS, Framer Motion
+- Visualization: Matplotlib, Seaborn, Recharts

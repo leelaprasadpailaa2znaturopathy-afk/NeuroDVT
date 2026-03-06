@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+.env
+
+# Data and Checkpoints
+data/
+checkpoints/
+*.pth
+*.json
+*.png
+!confusion_matrix.png
+
+# React / Node
+node_modules/
+dist/
+build/
+.DS_Store
+*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.bak

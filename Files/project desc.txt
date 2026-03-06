@@ -1,0 +1,77 @@
+To create a project on the **Dendritic Learning-Incorporated Vision Transformer (DVT)** within a tight deadline, you should focus on its two-part architecture: a **Vision Transformer (ViT)** for feature extraction and a **dendritic network** for classification,.
+
+### 1. Technical Architecture
+The DVT framework operates in a sequential pipeline to process images,:
+*   **Input Processing:** The input image is sliced into smaller patches. **Linear projection** and **position encoding** are applied to each patch to maintain spatial information.
+*   **Feature Extraction (ViT):** The patches pass through multiple stacked Transformer blocks. To make the model efficient on smaller datasets, DVT uses **Locality Self-Attention (LSA)**, which utilizes a **self-masking matrix** ($m$) and a learnable parameter ($\gamma$) to focus on local contextual information,.
+*   **Classification (Dendritic Network):** Instead of a traditional Multi-Layer Perceptron (MLP), DVT uses a biomimetic structure consisting of three layers,:
+    1.  **Synapse Layer:** Maps normalized inputs to $m$ dendritic branches using learnable weights ($w$) and biases ($b$).
+    2.  **Dendrite Layer:** Performs a **feature normalization operation** and **softmax activation** on each branch to improve stability and convergence,.
+    3.  **Soma Layer:** Integrates the processed information from all dendritic branches into the final classification result.
+
+### 2. Implementation Parameters
+For immediate project setup, use the following optimized configurations identified in the sources:
+*   **Optimizer:** **AdamW**.
+*   **Training Duration:** **100 epochs**.
+*   **Learning Rate:** The recommended value for favorable outcomes is **0.003**,.
+*   **Dendritic Branches:** For optimal prediction across various domains, set the number of branches between **8 and 32**,.
+*   **Normalization Constants:** In the feature normalization formula, $\epsilon$ is used as a constant to prevent division by zero.
+
+### 3. Key Formulas for Coding
+You will need to implement these core mathematical components,:
+*   **Locality Self-Attention:** $z = \delta(m \odot \frac{qk^T}{\sqrt{\gamma}})v$, where $m = J_n - \infty I_n$.
+*   **Dendritic Output ($y_k$):** $y_k = \sum_{i=1}^m \sum_{j=1}^d \delta(\eta(w_{k,i,j} \eta(x)_j + b_{k,i,j}))$, where $\eta$ represents the normalization function.
+*   **Feature Normalization:** $\eta(x) = \frac{x - \bar{x}}{\sqrt{\sigma(x) + \epsilon}} \theta + \lambda$, where $\theta$ and $\lambda$ are learnable parameters.
+
+### 4. Benchmarking Your Project
+The sources validated DVT performance using four datasets: **SVHN, CIFAR10, CIFAR100, and Tiny-ImageNet**,. DVT is particularly effective as classification difficulty increases, outperforming models like VGG19, ResNet50, and standard ViT,. An ablation study confirms that DVT achieves higher accuracy with **fewer parameters** than simply adding more linear layers.
+
+
+
+Things You Need for This Project
+1️⃣ Software
+
+Python
+
+PyTorch
+
+Google Colab or Jupyter
+
+TensorBoard (for visualization)
+
+2️⃣ Datasets
+
+Use these:
+
+CIFAR-10 image dataset
+
+CIFAR-100 image dataset
+
+SVHN dataset
+
+Tiny ImageNet dataset
+
+All are available directly through PyTorch torchvision.
+
+3️⃣ Hardware
+
+Minimum:
+
+GPU (Google Colab T4)
+
+Recommended:
+
+NVIDIA GPU
+
+12GB RAM
+
+Final Year Project Deliverables
+
+You will submit:
+
+1️⃣ Source code
+2️⃣ Trained model
+3️⃣ Results graphs
+4️⃣ Confusion matrix
+5️⃣ Research report
+6️⃣ Presentation PPT
