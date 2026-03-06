@@ -22,8 +22,8 @@ jobs:
           node-version: 20
 
       - name: Install and Build
+        working-directory: ./web-dashboard
         run: |
-          cd web-dashboard
           npm install
           npm run build
 
